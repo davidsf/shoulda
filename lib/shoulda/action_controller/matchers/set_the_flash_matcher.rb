@@ -57,12 +57,12 @@ module Shoulda # :nodoc:
 
         def string_value_matches?
           return true unless String === @value
-          flash.values.any? {|value| value == @value }
+          flash.select { |key, value| value == @value }.size > 0
         end
 
         def regexp_value_matches?
           return true unless Regexp === @value
-          flash.values.any? {|value| value =~ @value }
+          flash.select { |key, value| value =~ @value }.size > 0
         end
 
         def flash
